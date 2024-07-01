@@ -6,6 +6,7 @@ use App\Models\User\Channel;
 use App\Http\Requests\StoreChannelRequest;
 use App\Http\Requests\UpdateChannelRequest;
 use App\Repository\User\channelRepo;
+use Illuminate\Http\Request;
 
 class ChannelController extends Controller
 {
@@ -16,8 +17,13 @@ class ChannelController extends Controller
     {
         return $this->channelRepo->getFindId($id);
     }
-    public function destroy($channel)
+
+    public function update(Request $request)
     {
-        //
+        dd($request);
     }
+//    public function destroy($channel)
+//    {
+//        //
+//    }
 }

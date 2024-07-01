@@ -25,6 +25,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
 
 Route::middleware(['auth:sanctum'])->prefix('user')->name('user-')->group(function ( ) {
     Route::prefix('channel')->name('channel-')->group(function () {
-       Route::get('show/{show}' , [ChannelController::class , 'show'])->name('show');
+       Route::get('show/{channel}' , [ChannelController::class , 'show'])->name('show');
+       Route::put('update/{channel}' , [ChannelController::class , 'update'])->name('update');
     });
 });
