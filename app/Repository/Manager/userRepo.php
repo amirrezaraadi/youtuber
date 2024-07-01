@@ -33,6 +33,10 @@ class  userRepo
             'password' => Hash::make($data['password']),
             'remember_token' => Str::uuid(),
         ]);
+        $user->channel()->create([
+            'name' => $user->name,
+            'slug' => Str::slug($user->name),
+        ]);
         event(new Registered($user));
         return $this->generate($user);
     }
