@@ -6,8 +6,6 @@ use App\Exceptions\InvalidTokenException;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -58,14 +56,14 @@ class  userRepo
         return $this->generate($user);
     }
 
-    public function generate( $user)
+    public function generate($user)
     {
         $tokenResult = $user->createToken('token-name', ['*'], now()->addYears());
         $token = $tokenResult->plainTextToken;
         $accessToken = $tokenResult->accessToken;
         $accessToken->last_used_at = Carbon::now();
         $accessToken->save();
-        return $token ;
+        return $token;
     }
 
     public function createGoogle($google)
@@ -78,5 +76,27 @@ class  userRepo
         ]);
     }
 
+    public function getFinId($id)
+    {
+        return $this->query->findOrFail($id);
+    }
 
+    public function show()
+    {
+        // Todo Reaships
+    }
+
+    public function update($data, $id)
+    {
+        return $this->query->where('id', $id)->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+    }
+
+    public function delete($id)
+    {
+        return $this->query->where('id', $id)->delete();
+    }
 }
