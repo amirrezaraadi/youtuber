@@ -58,7 +58,7 @@ class  userRepo
         return $this->generate($user);
     }
 
-    private function generate( $user)
+    public function generate( $user)
     {
         $tokenResult = $user->createToken('token-name', ['*'], now()->addYears());
         $token = $tokenResult->plainTextToken;
@@ -66,6 +66,16 @@ class  userRepo
         $accessToken->last_used_at = Carbon::now();
         $accessToken->save();
         return $token ;
+    }
+
+    public function createGoogle($google)
+    {
+        return $this->query->create([
+            'name' => $google->name,
+            'email' => $google->email,
+            'email_verified' => Carbon::now(),
+            'remember_token' => Carbon::now(),
+        ]);
     }
 
 
