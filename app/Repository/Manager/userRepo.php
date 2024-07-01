@@ -4,6 +4,7 @@ namespace App\Repository\Manager;
 
 use App\Exceptions\InvalidTokenException;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -33,15 +34,9 @@ class  userRepo
             'remember_token' => Str::uuid(),
         ]);
         event(new Registered($user));
-        return $user->createToken(
-            'token-name', ['*'], now()->addWeek()
-        )->plainTextToken;
+        return $this->generate($user);
     }
 
-    /**
-     * @param $email
-     * @return Builder|Model|object|null
-     */
     public function getFindEmail($email)
     {
         return $this->query->where('email', $email)->first();
@@ -56,9 +51,17 @@ class  userRepo
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw new InvalidTokenException('رمز یا پسورد شما باهم مطابقت ندارد :)');
         }
-        return $user->createToken(
-            'token-name', ['*'], now()->addWeek()
-        )->plainTextToken;
+        return $this->generate($user);
+    }
+
+    private function generate( $user)
+    {
+        $tokenResult = $user->createToken('token-name', ['*'], now()->addYears());
+        $token = $tokenResult->plainTextToken;
+        $accessToken = $tokenResult->accessToken;
+        $accessToken->last_used_at = Carbon::now();
+        $accessToken->save();
+        return $token ;
     }
 
 
