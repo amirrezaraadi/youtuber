@@ -44,5 +44,8 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
         Route::get('/{user:id}' , [UserController::class , 'show'])->name('show');
         Route::put('/{user:id}', [UserController::class , 'update'])->name('update');
         Route::delete('/{user:id}', [UserController::class , 'destroy'])->name('delete');
+        Route::put('/active/{user:id}', [UserController::class , 'active'])->name('active');
+        Route::put('/no-active/{user:id}', [UserController::class , 'no_active'])->name('no-active');
+        Route::put('/ban/{user:id}', [UserController::class , 'ban'])->name('ban');
     });
 });

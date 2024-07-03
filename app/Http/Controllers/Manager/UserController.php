@@ -47,4 +47,24 @@ class UserController extends Controller
         $this->userRepo->delete($user->id);
         return response()->json(["message" => 'success delete user ', 'status' => 'success'], 200);
     }
+
+    public function ban($user)
+    {
+        $user = $this->userRepo->getFinId($user);
+        $this->userRepo->status($user->id , User::STATUS_BAN);
+        return response()->json(["message" => 'success change status user ', 'status' => 'success'], 200);
+    }
+    public function no_active($user)
+    {
+        $user = $this->userRepo->getFinId($user);
+        $this->userRepo->status($user->id , User::STATUS_NO_ACTIVE);
+        return response()->json(["message" => 'success change status user ', 'status' => 'success'], 200);
+    }
+    public function active($user)
+    {
+        $user = $this->userRepo->getFinId($user);
+        $this->userRepo->status($user->id , User::STATUS_ACTIVE);
+        $user->markEmailAsVerified();
+        return response()->json(["message" => 'success change status user ', 'status' => 'success'], 200);
+    }
 }

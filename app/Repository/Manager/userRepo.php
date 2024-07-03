@@ -109,4 +109,11 @@ class  userRepo
             'remember_token' => Carbon::now(),
         ]);
     }
+
+    public function status(mixed $id , $status)
+    {
+        return $this->query->where('id' , $id)->update([
+            'status' => $status
+        ]);
+    }
 }
