@@ -99,4 +99,14 @@ class  userRepo
     {
         return $this->query->where('id', $id)->delete();
     }
+
+    public function userCreate($data)
+    {
+        return $this->query->create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            "password" => Hash::make($data['password']),
+            'remember_token' => Carbon::now(),
+        ]);
+    }
 }

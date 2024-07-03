@@ -44,4 +44,9 @@ class AuthenticatedSessionController extends Controller
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
+
+    public function user(Request $request)
+    {
+        return $request->user();
+    }
 }

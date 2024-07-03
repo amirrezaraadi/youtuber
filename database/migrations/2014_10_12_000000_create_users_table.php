@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('full_name')->unique();
+            $table->string('full_name')->nullable()->unique();
             $table->enum('status', \App\Models\User::$status)
                 ->default(\App\Models\User::STATUS_NO_ACTIVE);
             $table->enum('state_status', \App\Models\User::$state_status)
