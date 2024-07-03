@@ -10,37 +10,41 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct(public userRepo $userRepo){}
+    public function __construct(public userRepo $userRepo)
+    {
+    }
 
     public function index()
     {
         return $this->userRepo->index();
     }
+
     public function store(UserCreateRequest $request): \Illuminate\Http\JsonResponse
     {
-         $this->userRepo->userCreate($request->validated());
-        return response()->json(['message' => 'success create user' , 'status' => 'success'],200);
+        $this->userRepo->userCreate($request->validated());
+        return response()->json(['message' => 'success create user', 'status' => 'success'], 200);
     }
 
 
-    public function show( $user)
+    public function show($user)
     {
         return $this->userRepo->getFinId($user);
     }
 
 
-    public function update(UserCreateRequest $request,  $user): \Illuminate\Http\JsonResponse
+    public function update(UserCreateRequest $request, $user): \Illuminate\Http\JsonResponse
     {
         $user = $this->userRepo->getFinId($user);
-        $this->userRepo->update($request->validated() , $user );
-        return response()->json(["message" => 'success update user ' , 'status' => 'success'],200);
+        $this->userRepo->update($request->validated(), $user);
+        return response()->json(["message" => 'success update user ', 'status' => 'success'], 200);
     }
 
 
-    public function destroy( $user): \Illuminate\Http\JsonResponse
+    public function destroy($user): \Illuminate\Http\JsonResponse
     {
         $user = $this->userRepo->getFinId($user);
-        $this->userRepo->delete($user->id );
-        return response()->json(["message" => 'success delete user ' , 'status' => 'success'],200);
+        // TODO reaships
+        $this->userRepo->delete($user->id);
+        return response()->json(["message" => 'success delete user ', 'status' => 'success'], 200);
     }
 }

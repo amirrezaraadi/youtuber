@@ -88,10 +88,10 @@ class  userRepo
 
     public function update($data, $id)
     {
-        return $this->query->where('id', $id)->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        return $this->query->where('id', $id->id)->update([
+            'name' => $data['name']??  $id->name,
+            'email' => $data['email'] ?? $id->email,
+            'password' => Hash::make($data['password']) ?? $id->password,
         ]);
     }
 

@@ -38,6 +38,11 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
     });
 
     Route::prefix('users')->name('users')->group(function () {
-        Route::apiResource('/' , UserController::class);
+//        Route::apiResource('/' , UserController::class);
+        Route::get('/' , [UserController::class , 'index'])->name('index');
+        Route::post('/' , [UserController::class , 'store'])->name('store');
+        Route::get('/{user:id}' , [UserController::class , 'show'])->name('show');
+        Route::put('/{user:id}', [UserController::class , 'update'])->name('update');
+        Route::delete('/{user:id}', [UserController::class , 'destroy'])->name('delete');
     });
 });
