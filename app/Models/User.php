@@ -24,6 +24,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'full_name',
+        'status',
+        'state_status',
+        'profile',
+        'ip_address',
+        'website',
+        'body',
+        'email_verified_at',
+        'remember_token'
     ];
 
     /**
@@ -45,8 +54,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    const STATUS_BAN = "ban";
+    const STATUS_SUCCESS = "success";
+    const STATUS_ACTIVE = "active";
+    const STATUS_NO_ACTIVE = "no-active";
+
+    public static array $status = [
+        self::STATUS_BAN,
+        self::STATUS_SUCCESS,
+        self::STATUS_ACTIVE,
+        self::STATUS_NO_ACTIVE,
+    ];
+
+
+    const STATE_STATUS_ACTIVE = "active";
+    const STATE_STATUS_NO_ACTIVE = "no_active";
+
+    public static array $state_status = [
+        self::STATE_STATUS_ACTIVE,
+        self::STATE_STATUS_NO_ACTIVE,
+    ];
+
     public function channel(): HasOne
     {
         return $this->hasOne(Channel::class);
     }
+
 }
