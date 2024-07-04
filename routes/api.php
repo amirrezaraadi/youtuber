@@ -3,9 +3,10 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\Manager\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\PhoneController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,11 +33,12 @@ Route::middleware(['auth:sanctum'])->prefix('user')->name('user-')->group(functi
 });
 
 Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(function ( ) {
+    Route::apiResource('phones' , PhoneController::class);
+    Route::apiResource('county' , CountryController::class);
     Route::prefix('channel')->name('channel-')->group(function () {
         Route::get('show/{channel}' , [ChannelController::class , 'show'])->name('show');
         Route::put('update/{channel}' , [ChannelController::class , 'update'])->name('update');
     });
-
     Route::prefix('users')->name('users')->group(function () {
 //        Route::apiResource('/' , UserController::class);
         Route::get('/' , [UserController::class , 'index'])->name('index');
