@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Manager\UserCreateRequest;
+use App\Http\Requests\Manager\UserUpdateRequest;
 use App\Models\User;
 use App\Repository\Manager\userRepo;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class UserController extends Controller
     }
 
 
-    public function update(UserCreateRequest $request, $user): \Illuminate\Http\JsonResponse
+    public function update(UserUpdateRequest $request, $user): \Illuminate\Http\JsonResponse
     {
         $user = $this->userRepo->getFinId($user);
         $this->userRepo->update($request->validated(), $user);
