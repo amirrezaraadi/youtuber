@@ -11,7 +11,7 @@ class StorePhoneRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check() === true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StorePhoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "number" => ['required', 'string'],
+            'user_id' => ['required', 'string'],
+            'country_id' => ['required', 'exists:countries,id'],
         ];
     }
 }
