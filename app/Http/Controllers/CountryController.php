@@ -21,7 +21,7 @@ class CountryController extends Controller
     public function store(StoreCountryRequest $request): \Illuminate\Http\JsonResponse
     {
         $this->countryRepo->create($request->validated());
-        return response()->json(["message" => 'success create country ' , 'status' => 'success'],200);
+        return response()->json(["message" => 'success create country ', 'status' => 'success'], 200);
     }
 
 
@@ -30,16 +30,11 @@ class CountryController extends Controller
         return $this->countryRepo->getFindId($country);
     }
 
-
-    public function edit($country)
+    public function update(UpdateCountryRequest $request, $country): \Illuminate\Http\JsonResponse
     {
-        //
-    }
-
-
-    public function update(UpdateCountryRequest $request, $country)
-    {
-        //
+        $check = $this->countryRepo->getFindId($country);
+        $this->countryRepo->update($request->validated(), $check);
+        return response()->json(['message' => 'success update', 'status' => 'success'], 200);
     }
 
 

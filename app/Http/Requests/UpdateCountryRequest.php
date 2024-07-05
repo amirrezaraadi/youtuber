@@ -11,7 +11,9 @@ class UpdateCountryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true
+//             TODO ROLE
+            ;
     }
 
     /**
@@ -22,7 +24,8 @@ class UpdateCountryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['nullable', 'string', 'min:2'],
+            'country_code' => ['nullable', 'string', 'min:2'],
         ];
     }
 }
