@@ -38,8 +38,10 @@ class PhoneController extends Controller
     }
 
 
-    public function destroy($phone)
+    public function destroy($phone): \Illuminate\Http\JsonResponse
     {
-        //
+        $check = $this->phoneRepo->getFindId($phone);
+        $this->phoneRepo->delete($check);
+        return response()->json(['message' => 'update phones', 'status' => 'success'], 200);
     }
 }

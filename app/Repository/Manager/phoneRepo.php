@@ -3,6 +3,7 @@
 namespace App\Repository\Manager;
 
 use App\Models\Manager\Phone;
+use Couchbase\PhraseSearchQuery;
 
 class phoneRepo
 {
@@ -32,6 +33,11 @@ class phoneRepo
             'user_id' => $data['user_id'] ?? $id->user_id,
             'country_id' => $data['country_id'] ?? $id->country_id,
         ]);
+    }
+
+    public function delete($id)
+    {
+        return Phone::query()->where('id' , $id->id)->delete();
     }
 }
 
