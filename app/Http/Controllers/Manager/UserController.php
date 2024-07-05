@@ -35,6 +35,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, $user): \Illuminate\Http\JsonResponse
     {
+        dd($request);
         $user = $this->userRepo->getFinId($user);
         $this->userRepo->update($request->validated(), $user);
         return response()->json(["message" => 'success update user ', 'status' => 'success'], 200);

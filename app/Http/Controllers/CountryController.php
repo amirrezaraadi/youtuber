@@ -5,61 +5,45 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCountryRequest;
 use App\Http\Requests\UpdateCountryRequest;
 use App\Models\Manager\Country;
+use App\Repository\Manager\countryRepo;
 
 class CountryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(public countryRepo $countryRepo)
+    {
+    }
+
     public function index()
     {
-        //
+        return $this->countryRepo->index();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreCountryRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $this->countryRepo->create($request->validated());
+        return response()->json(["message" => 'success create country ' , 'status' => 'success'],200);
+    }
+
+
+    public function show($country)
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCountryRequest $request)
+
+    public function edit($country)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Country $country)
+
+    public function update(UpdateCountryRequest $request, $country)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Country $country)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCountryRequest $request, Country $country)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Country $country)
+    public function destroy($country)
     {
         //
     }
