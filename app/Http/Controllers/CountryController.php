@@ -27,7 +27,7 @@ class CountryController extends Controller
 
     public function show($country)
     {
-        //
+        return $this->countryRepo->getFindId($country);
     }
 
 

@@ -21,4 +21,9 @@ class countryRepo
             'slug' => SlugService::createSlug(Country::class , 'slug', $data['title']),
         ]);
     }
+
+    public function getFindId($id)
+    {
+        return Country::query()->findOrFail($id);
+    }
 }
