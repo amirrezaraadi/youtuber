@@ -11,7 +11,7 @@ class UpdatePhoneRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check() === true ;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdatePhoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "number" => ['nullable', 'string'],
+            'user_id' => ['nullable', 'string'],
+            'country_id' => ['nullable', 'exists:countries,id'],
         ];
     }
 }

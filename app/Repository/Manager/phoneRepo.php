@@ -24,5 +24,14 @@ class phoneRepo
     {
         return Phone::query()->findOrFail($id);
     }
+
+    public function update($data, $id)
+    {
+        return Phone::query()->where('id', $id->id)->update([
+            "number" => $data['number'] ?? $id->number,
+            'user_id' => $data['user_id'] ?? $id->user_id,
+            'country_id' => $data['country_id'] ?? $id->country_id,
+        ]);
+    }
 }
 

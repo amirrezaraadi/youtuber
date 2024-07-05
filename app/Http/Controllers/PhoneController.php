@@ -9,7 +9,9 @@ use App\Repository\Manager\phoneRepo;
 
 class PhoneController extends Controller
 {
-    public function __construct(public phoneRepo $phoneRepo){}
+    public function __construct(public phoneRepo $phoneRepo)
+    {
+    }
 
     public function index()
     {
@@ -19,18 +21,20 @@ class PhoneController extends Controller
     public function store(StorePhoneRequest $request): \Illuminate\Http\JsonResponse
     {
         $this->phoneRepo->create($request->validated());
-        return response()->json(['message' => 'create phones' , 'status' => 'success'],200);
+        return response()->json(['message' => 'create phones', 'status' => 'success'], 200);
     }
 
 
     public function show($phone)
     {
-        //
+        return $this->phoneRepo->getFindId($phone);
     }
 
-    public function update(UpdatePhoneRequest $request, $phone)
+    public function update(UpdatePhoneRequest $request, $phone): \Illuminate\Http\JsonResponse
     {
-        //
+        $check = $this->phoneRepo->getFindId($phone);
+        $this->phoneRepo->update($request->validated(), $check);
+        return response()->json(['message' => 'update phones', 'status' => 'success'], 200);
     }
 
 
