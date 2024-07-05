@@ -36,4 +36,9 @@ class countryRepo
             'slug' => SlugService::createSlug(Country::class, 'slug', $data['title'] ?? $id->title),
         ]);
     }
+
+    public function delete($id)
+    {
+        return Country::query()->where('id', $id->id)->delete();
+    }
 }

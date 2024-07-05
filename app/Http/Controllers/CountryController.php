@@ -38,8 +38,10 @@ class CountryController extends Controller
     }
 
 
-    public function destroy($country)
+    public function destroy($country): \Illuminate\Http\JsonResponse
     {
-        //
+        $check = $this->countryRepo->getFindId($country);
+        $this->countryRepo->delete($check);
+        return response()->json(['message' => 'success delete', 'status' => 'success'], 200);
     }
 }
