@@ -19,7 +19,7 @@ class locationRepo
 
     public function create($data)
     {
-        return $this->create([
+        return $this->query->create([
             'latitude' => $data["latitude"] ,
             'longitude' => $data["longitude"] ,
             'building_number' => $data["building_number"] ,
