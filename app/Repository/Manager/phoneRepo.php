@@ -38,6 +38,7 @@ class phoneRepo
     public function delete($id)
     {
         return Phone::query()->where('id', $id->id)->delete();
+//        return Phone::query()->where('id', $id->id)->forceDelete();
     }
 }
 

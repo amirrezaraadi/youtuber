@@ -10,6 +10,18 @@ class Country extends Model
 {
     use HasFactory, Sluggable;
 
+
+    protected $fillable = [
+        'name',
+        'country_code',
+        'slug',
+    ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
     public function sluggable(): array
     {
         return [
@@ -18,10 +30,4 @@ class Country extends Model
             ]
         ];
     }
-
-    protected $fillable = [
-        'name',
-        'country_code',
-        'slug',
-    ];
 }
