@@ -11,7 +11,9 @@ class UpdateCityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true
+            // TODO ROLE PERMISSION
+            ;
     }
 
     /**
@@ -22,7 +24,8 @@ class UpdateCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => ['nullable' , 'string' , 'min:3'],
+            "province_id" => ['nullable' , 'integer'  , "exists:provinces,id"],
         ];
     }
 }

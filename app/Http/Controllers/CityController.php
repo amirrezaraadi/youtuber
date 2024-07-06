@@ -5,62 +5,44 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
 use App\Models\Manager\City;
+use App\Repository\Manager\cityRepo;
+use App\Repository\Manager\provinceRepo;
 
 class CityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(public cityRepo $cityRepo)
+    {
+    }
+
     public function index()
     {
-        //
+        return $this->cityRepo->index();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreCityRequest $request): \Illuminate\Http\JsonResponse
     {
-        //
+        $this->cityRepo->create($request->validated());
+        return response()->json(['message' => 'success', 'status' => 'success'], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCityRequest $request)
+
+    public function show($city)
     {
-        //
+        return $this->cityRepo->getFindId($city);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(City $city)
+    public function update(UpdateCityRequest $request, $city): \Illuminate\Http\JsonResponse
     {
-        //
+        $check = $this->cityRepo->getFindId($city);
+        $this->cityRepo->update($request->validated(), $check);
+        return response()->json(["message" => 'success', 'status' => 'success'], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(City $city)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCityRequest $request, City $city)
+    public function destroy($city): \Illuminate\Http\JsonResponse
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(City $city)
-    {
-        //
+        $check = $this->cityRepo->getFindId($city);
+        $this->cityRepo->delete($check);
+        return response()->json(["message" => 'success', 'status' => 'success'], 200);
     }
 }

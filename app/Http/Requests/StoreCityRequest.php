@@ -11,7 +11,9 @@ class StoreCityRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true
+//            TODO ROLE PERMISSION
+            ;
     }
 
     /**
@@ -22,7 +24,8 @@ class StoreCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => ['required' , 'string' , 'min:3'],
+            "province_id" => ['required' , 'integer'  , "exists:provinces,id"],
         ];
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\Manager\UserController;
@@ -37,6 +38,7 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
     Route::apiResource('phones', PhoneController::class);
     Route::apiResource('county', CountryController::class);
     Route::apiResource('provinces', ProvinceController::class);
+    Route::apiResource('city', CityController::class);
     Route::prefix('channel')->name('channel-')->group(function () {
         Route::get('show/{channel}', [ChannelController::class, 'show'])->name('show');
         Route::put('update/{channel}', [ChannelController::class, 'update'])->name('update');
