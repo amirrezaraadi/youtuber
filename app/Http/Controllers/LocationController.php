@@ -25,26 +25,23 @@ class LocationController extends Controller
     }
 
 
-    public function show(Location $location)
+    public function show($location)
     {
-        //
+        return $this->locationRepo->getFindId($location);
+    }
+
+    public function update(UpdateLocationRequest $request, $location)
+    {
+        $check = $this->locationRepo->getFindId($location);
+        $this->locationRepo->update($request->validated(), $check);
+        return response()->json(['message' => 'success update', 'status' => 'success'], 200);
     }
 
 
-    public function edit(Location $location)
+    public function destroy($location)
     {
-        //
-    }
-
-
-    public function update(UpdateLocationRequest $request, Location $location)
-    {
-        //
-    }
-
-
-    public function destroy(Location $location)
-    {
-        //
+        $check = $this->locationRepo->getFindId($location);
+        $this->locationRepo->delete($check);
+        return response()->json(['message' => 'success update', 'status' => 'success'], 200);
     }
 }
