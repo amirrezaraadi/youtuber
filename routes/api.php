@@ -6,6 +6,7 @@ use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Manager\UserController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ProvinceController;
@@ -38,6 +39,7 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
     Route::apiResource('phones', PhoneController::class);
     Route::apiResource('county', CountryController::class);
     Route::apiResource('provinces', ProvinceController::class);
+    Route::apiResource('locations', LocationController::class);
     Route::apiResource('city', CityController::class);
     Route::prefix('channel')->name('channel-')->group(function () {
         Route::get('show/{channel}', [ChannelController::class, 'show'])->name('show');
