@@ -23,7 +23,6 @@ class StorePhoneRequest extends FormRequest
     {
         return [
             "number" => ['required', 'string'],
-            'user_id' => ['required', 'string'],
             'country_id' => ['required', 'exists:countries,id'],
         ];
     }
