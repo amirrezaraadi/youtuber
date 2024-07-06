@@ -41,6 +41,8 @@ class ProvinceController extends Controller
 
     public function destroy($province)
     {
-        //
+        $check = $this->provinceRepo->getFindId($province);
+        $this->provinceRepo->delete($check);
+        return response()->json(['message' => 'success delete provinces', 'status' => 'success'], 200);
     }
 }
