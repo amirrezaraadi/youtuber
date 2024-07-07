@@ -40,14 +40,12 @@ class categoryRepo
         return $this->query->whereIn('title', $title)->get()->pluck('id')->toArray();
     }
 
-    public function update($data, $id, $icon)
+    public function update($data, $id)
     {
-        $category = $this->getFindId($id);
-        return $this->query->where('id', $id)->update([
-            'title' => $data['title'] ?? $category->title,
-            'slug' => SlugService::createSlug(Category::class, 'slug', $data['title'] ?? $category->title),
-            'icon' => $icon ?? $category->icon,
-            'parent_id' => $data['parent_id'] ?? $category->parent_id,
+        return $this->query->where('id', $id->id)->update([
+            'title' => $data['title'] ?? $id->title,
+            'slug' => SlugService::createSlug(Category::class, 'slug', $data['title'] ?? $id->title),
+            'parent_id' => $data['parent_id']  ,
             'user_id' => auth()->id(),
         ]);
     }
@@ -103,7 +101,7 @@ class categoryRepo
 
     public function searchTitle($title)
     {
-        $this->query->where("title", "LIKE" , "%" . $title . "%");
+        $this->query->where("title", "LIKE", "%" . $title . "%");
         return $this;
     }
 

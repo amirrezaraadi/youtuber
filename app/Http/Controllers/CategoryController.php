@@ -9,7 +9,9 @@ use App\Repository\Manager\categoryRepo;
 
 class CategoryController extends Controller
 {
-    public function __construct(public categoryRepo $categoryRepo){}
+    public function __construct(public categoryRepo $categoryRepo)
+    {
+    }
 
     public function index()
     {
@@ -19,29 +21,24 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $this->categoryRepo->create($request->validated());
-        return response()->json(['message' => 'success' , 'status' => 'success'],200);
+        return response()->json(['message' => 'success', 'status' => 'success'], 200);
     }
 
 
-    public function show(Category $category)
+    public function show($category)
     {
-        //
+        return $this->categoryRepo->getFindId($category);
     }
 
-
-    public function edit(Category $category)
+    public function update(UpdateCategoryRequest $request, $category)
     {
-        //
+        $check = $this->categoryRepo->getFindId($category);
+        $this->categoryRepo->update($request->validated(), $check);
+        return response()->json(['message' => 'success update controller ', 'status' => 'success'], 200);
     }
 
 
-    public function update(UpdateCategoryRequest $request, Category $category)
-    {
-        //
-    }
-
-
-    public function destroy(Category $category)
+    public function destroy($category)
     {
         //
     }
