@@ -58,4 +58,7 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
         Route::put('/no-active/{user:id}', [UserController::class, 'no_active'])->name('no-active');
         Route::put('/ban/{user:id}', [UserController::class, 'ban'])->name('ban');
     });
+    Route::put('category-status-success/{category:id}', [CategoryController::class, 'success'])->name('category-status-success');
+    Route::put('category-status-pending/{category:id}', [CategoryController::class, 'pending'])->name('category-status-pending');
+    Route::put('category-status-reject/{category:id}', [CategoryController::class, 'reject'])->name('category-status-reject');
 });

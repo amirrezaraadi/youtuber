@@ -52,13 +52,12 @@ class categoryRepo
 
     public function delete($id)
     {
-        return $this->query->where('id', $id)->delete();
+        return $this->query->where('id', $id->id)->delete();
     }
 
     public function status($id, $status)
     {
-        $this->getFindId($id);
-        return $this->query->where('id', $id)->update([
+        return $this->query->where('id', $id->id)->update([
             'status' => $status
         ]);
     }
