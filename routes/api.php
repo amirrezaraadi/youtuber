@@ -13,7 +13,7 @@ use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ProvinceController;
 use Illuminate\Support\Facades\Route;
 
-
+/*authentication*/
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
     Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login');
@@ -23,32 +23,30 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('google', [GoogleController::class, 'google'])->name('google');
     Route::get('google/callback', [GoogleController::class, 'google_callback'])->name('google-callback');
 });
-
-
+/*panel user*/
 Route::middleware(['auth:sanctum'])->prefix('user')->name('user-')->group(function () {
     Route::prefix('channel')->name('channel-')->group(function () {
         Route::get('show/{channel}', [ChannelController::class, 'show'])->name('show');
         Route::put('update/{channel}', [ChannelController::class, 'update'])->name('update');
     });
-
     Route::prefix('users')->name('users')->group(function () {
         Route::apiResource('/', UserController::class);
     });
 });
-
+/*panel manager*/
 Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(function () {
     Route::apiResource('phones', PhoneController::class);
     Route::apiResource('county', CountryController::class);
     Route::apiResource('provinces', ProvinceController::class);
     Route::apiResource('locations', LocationController::class);
-    Route::apiResource('category', CategoryController::class);
     Route::apiResource('city', CityController::class);
+    /*channel*/
     Route::prefix('channel')->name('channel-')->group(function () {
         Route::get('show/{channel}', [ChannelController::class, 'show'])->name('show');
         Route::put('update/{channel}', [ChannelController::class, 'update'])->name('update');
     });
+    /*users*/
     Route::prefix('users')->name('users')->group(function () {
-//        Route::apiResource('/' , UserController::class);
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::post('/', [UserController::class, 'store'])->name('store');
         Route::get('/{user:id}', [UserController::class, 'show'])->name('show');
@@ -58,7 +56,11 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
         Route::put('/no-active/{user:id}', [UserController::class, 'no_active'])->name('no-active');
         Route::put('/ban/{user:id}', [UserController::class, 'ban'])->name('ban');
     });
+    /*category*/
+    Route::apiResource('category', CategoryController::class);
     Route::put('category-status-success/{category:id}', [CategoryController::class, 'success'])->name('category-status-success');
     Route::put('category-status-pending/{category:id}', [CategoryController::class, 'pending'])->name('category-status-pending');
     Route::put('category-status-reject/{category:id}', [CategoryController::class, 'reject'])->name('category-status-reject');
+
+
 });
