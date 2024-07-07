@@ -11,7 +11,9 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true
+            // TODO ROLE PERMISSION
+            ;
     }
 
     /**
@@ -22,7 +24,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required' , 'string' , 'min:1' , 'max:250'],
+            'parent_id' => ['nullable' , 'integer' , 'exists:categories,id'],
         ];
     }
 }
