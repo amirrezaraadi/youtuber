@@ -11,6 +11,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Manager\UserController;
 use App\Http\Controllers\PhoneController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*authentication*/
@@ -62,5 +63,12 @@ Route::middleware(['auth:sanctum'])->prefix('manager')->name('manager-')->group(
     Route::put('category-status-pending/{category:id}', [CategoryController::class, 'pending'])->name('category-status-pending');
     Route::put('category-status-reject/{category:id}', [CategoryController::class, 'reject'])->name('category-status-reject');
 
+    /*tag*/
+    Route::apiResource('tags', TagController::class);
+    Route::put('tag-status-success/{tag:id}', [TagController::class, 'success'])->name('tag-status-success');
+    Route::put('tag-status-pending/{tag:id}', [TagController::class, 'pending'])->name('tag-status-pending');
+    Route::put('tag-status-reject/{tag:id}', [TagController::class, 'reject'])->name('tag-status-reject');
+
+    /*tag user*/
 
 });
