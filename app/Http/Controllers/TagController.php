@@ -31,14 +31,16 @@ class TagController extends Controller
     }
 
 
-    public function update(UpdateTagRequest $request, $tag)
+    public function update(UpdateTagRequest $request, $tag): \Illuminate\Http\JsonResponse
     {
-        //
+        $tagId = $this->tagRepo->getFindId($tag);
+        $this->tagRepo->update($request->validated(), $tagId);
+        return response()->json(['message' => "success update tag ", 'status' => 'success'], 200);
     }
 
-
-    public function destroy($tag)
-    {
-        //
-    }
+//
+//    public function destroy($tag): \Illuminate\Http\JsonResponse
+//    {
+//        //
+//    }
 }

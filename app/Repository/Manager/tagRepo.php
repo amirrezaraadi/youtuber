@@ -48,4 +48,24 @@ class tagRepo
         return Tag::query()->findOrFail($tag);
     }
 
+//    public function update($data, $tagId)
+//    {
+//        $tagsArray = explode(',', implode(',', $data['title']));
+//        foreach ($tagsArray as $item) {
+//            $check = Tag::query()->where('title', $item)->first();
+//            if (! is_null($check)) {
+//                $tags = Tag::query()->where('id', $check->id)->update([
+//                    'title' => $item,
+//                    'slug' => SlugService::createSlug(Tag::class, 'slug', $item),
+//                    'user_id' => auth()->id()
+//                ]);
+//            }
+//        }
+//    }
+    public function update($data, $tagId)
+    {
+        return Tag::query()->where('id' , $tagId->id)->update([
+            "title" => $data['title'],
+        ]);
+    }
 }

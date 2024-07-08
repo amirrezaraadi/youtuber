@@ -11,7 +11,8 @@ class UpdateTagRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true//            TODO ROLE PERMISSION
+            ;
     }
 
     /**
@@ -22,7 +23,7 @@ class UpdateTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', "min:1", "max:250"]
         ];
     }
 }
