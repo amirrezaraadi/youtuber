@@ -11,7 +11,8 @@ class StoreTagRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true//            TODO ROLE PERMISSION
+            ;
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title" => ['required']
         ];
     }
 }
