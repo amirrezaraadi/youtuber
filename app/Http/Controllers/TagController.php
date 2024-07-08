@@ -9,9 +9,7 @@ use App\Repository\Manager\tagRepo;
 
 class TagController extends Controller
 {
-    public function __construct(public tagRepo $tagRepo)
-    {
-    }
+    public function __construct(public tagRepo $tagRepo){}
 
     public function index()
     {
