@@ -68,4 +68,17 @@ class tagRepo
             "title" => $data['title'],
         ]);
     }
+
+    public function delete($tagId)
+    {
+        return Tag::query()->where('id' , $tagId->id)->delete();
+    }
+
+    public function status($tagId,  $status)
+    {
+        return Tag::query()->where('id' , $tagId->id)
+            ->update([
+                'status' => $status
+            ]);
+    }
 }
