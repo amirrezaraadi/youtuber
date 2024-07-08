@@ -25,25 +25,19 @@ class TagController extends Controller
     }
 
 
-    public function show(Tag $tag)
+    public function show($tag)
+    {
+        return $this->tagRepo->getFindId($tag);
+    }
+
+
+    public function update(UpdateTagRequest $request, $tag)
     {
         //
     }
 
 
-    public function edit(Tag $tag)
-    {
-        //
-    }
-
-
-    public function update(UpdateTagRequest $request, Tag $tag)
-    {
-        //
-    }
-
-
-    public function destroy(Tag $tag)
+    public function destroy($tag)
     {
         //
     }

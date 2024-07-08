@@ -42,4 +42,10 @@ class tagRepo
             return preg_replace('/[\[\]\s]+/', '', $category);
         }, $tagsArray);
     }
+
+    public function getFindId($tag)
+    {
+        return Tag::query()->findOrFail($tag);
+    }
+
 }
